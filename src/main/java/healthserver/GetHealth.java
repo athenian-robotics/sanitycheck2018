@@ -1,5 +1,5 @@
 package healthserver;
-
+//TODO implement status checking by system
 class GetHealth {
     static String checkStatus(String system) {
         if (system.contentEquals("TestTrue")) {

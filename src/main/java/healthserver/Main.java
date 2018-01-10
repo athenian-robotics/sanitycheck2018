@@ -9,5 +9,6 @@ public class Main {
         get("/gremlin", (req, res) -> Gremlin.getGremlinString());
         String status = "TestFalse: " + GetHealth.checkStatus("TestFalse") + " | TestTrue: " + GetHealth.checkStatus("TestTrue");
         get("/status", (req, res) -> status);
+
     }
 }

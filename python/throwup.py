@@ -21,13 +21,8 @@ def throwup():
     return Response(text, mimetype='text/plain')
     # throwup (badump-chhh) a simple server that says "I AM FANCY" in plaintext
 
-@http.route('/statesimple')
-def statesimple():
-    global dataVault
-    text = dataVault.getValue("test_system")
-    return Response(text, mimetype='text/html')
-@http.route('/itsprobbroken')
-def itsprobbroken():
+@http.route('/overview')
+def overview():
     global dataVault
     text = dataVault.addHTML()
     return Response(text, mimetype='text/html')

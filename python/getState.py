@@ -1,7 +1,13 @@
-def getStateSimple(system):
-    # Return the value sent by the health check topic and the time sense it was received
-    return "value | time"
+import time
+import rospy
+import dataVault
+from std_msgs.msg import String
 
-def getStateDetailed(system):
-    # Get the logfile and print it
-    return "this functionality is not yet implimented"
+def callback(data):
+    pass
+
+def listener(system):
+    rospy.init_node('healthcheckbackend')
+
+    rospy.Subscriber(system, String, callback)
+    rospy.spin()

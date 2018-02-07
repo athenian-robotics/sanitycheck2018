@@ -1,8 +1,23 @@
+import time
+
+
 class StatusVault(object):
-    html = ''
+
     def __init__(self):
         self.healthData = {}
 
+    def addHTML(self):
+        html1 = "{}".format(
+            '''<!DOCTYPE html><html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head><body><table><tr><th>Topic</th><th>Data</th><th>Time</th></tr>''')
+        html2 = ''
+        for i in self.healthData.keys():
+            html2 += '''<tr>
+            <th>{0}</th>
+            <th>{1}</th>
+            <th>{2}</th>
+            </tr>'''.format(i, self.healthData[i][0], str(time.time()-self.healthData[i][1]))
+        html3 = '''</table></body></html>'''
+        return html1 + html2 + html3
 
     def getValue(self, key):
         if key in self.healthData:
@@ -12,71 +27,7 @@ class StatusVault(object):
             return self.healthData[key]
 
     def callback_test(self, data):
-        self.healthData["test_system"] = data.data
+        self.healthData["test_system"] = [data.data, time.time()]
 
-    def makeHTML(self):
-        html = '''
-        <!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-
-<table>
-  <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-  <tr>
-    <td>Laughing Bacchus Winecellars</td>
-    <td>Yoshi Tannamuri</td>
-    <td>Canada</td>
-  </tr>
-  <tr>
-    <td>Magazzini Alimentari Riuniti</td>
-    <td>Giovanni Rovelli</td>
-    <td>Italy</td>
-  </tr>
-</table>
-
-</body>
-</html>
-'''
+    def callback_test2(self, data):
+        self.healthData["test_system2"] = [data.data, time.time()]

@@ -26,6 +26,11 @@ def statesimple():
     global dataVault
     text = dataVault.getValue("test_system")
     return Response(text, mimetype='text/html')
+@http.route('/itsprobbroken')
+def itsprobbroken():
+    global dataVault
+    text = dataVault.addHTML()
+    return Response(text, mimetype='text/html')
 
 def run_http(flask_server, host, port):
     flask_server.run(host=host, port=port)
@@ -33,10 +38,7 @@ def run_http(flask_server, host, port):
 if __name__ == '__main__':
     # http.run(debug=False, port=8080, host='0.0.0.0')
     Thread(target=run_http, kwargs={'flask_server': http, "host": "0.0.0.0", "port": 8080}).start()
-
     rospy.init_node('healthcheckbackend')
+    rospy.Subscriber("test_system2", String, dataVault.callback_test2)
     rospy.Subscriber("test_system", String, dataVault.callback_test)
-
-    # rospy.Subscriber("test_system", String, dataVault.callback_test)
-
     rospy.spin()

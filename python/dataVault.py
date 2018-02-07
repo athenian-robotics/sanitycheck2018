@@ -12,7 +12,7 @@ class StatusVault(object):
             return self.healthData[key]
 
     def callback_test(self, data):
-        self.healthData["test"] = data.data
+        self.healthData["test_system"] = data.data
 
     def makeHTML(self):
         html = '''

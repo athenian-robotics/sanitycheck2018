@@ -24,8 +24,7 @@ def throwup():
 @http.route('/statesimple')
 def statesimple():
     global dataVault
-    dataVault.makeHTML()
-    text = dataVault.html
+    text = dataVault.getValue("test_system")
     return Response(text, mimetype='text/html')
 
 def run_http(flask_server, host, port):

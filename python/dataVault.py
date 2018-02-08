@@ -2,7 +2,6 @@ import time
 
 
 class StatusVault(object):
-
     def __init__(self):
         self.healthData = {}
         with open("/home/arc852/catkin_ws/src/healthcheck/src/sanitycheck2018/python/topics.txt") as f:

@@ -41,7 +41,6 @@ if __name__ == '__main__':
     Thread(target=run_http, kwargs={'flask_server': http, "host": "0.0.0.0", "port": 8080}).start()
     # Start a server in a new thread
     rospy.init_node('healthcheckbackend')
-    rospy.Subscriber("test_system2", String, dataVault.callback_test2)  # TODO make one callback with arguments
-    # TODO subscribe with for loop from file of topics
-    rospy.Subscriber("test_system", String, dataVault.callback_test)
+    for topic in dataVault.topics:
+        rospy.Subscriber(topic, String, dataVault.callback, topic)
     rospy.spin()  # don't die all over yourself

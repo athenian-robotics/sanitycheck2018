@@ -1,6 +1,5 @@
 import time
 
-
 class StatusVault(object):
     def __init__(self):
         self.healthData = {}
@@ -28,7 +27,9 @@ class StatusVault(object):
         else:
             self.healthData[key] = ["The default value; no value has been set yet.", time.time()]  # otherwise set a value
             return self.healthData[key]  # and return it
-    def set_deafult(self,key):
+
+    def set_deafult(self, key):  # set the default data
         self.healthData[key] = ["The default value; no value has been set yet.", time.time()]
+
     def callback(self, data, system):
         self.healthData[system] = [data.data, time.time()]

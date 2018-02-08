@@ -4,31 +4,31 @@ import time
 class StatusVault(object):
 
     def __init__(self):
-        self.healthData = {}
+        self.healthData = {}  # TODO make it contain no data but all the needed keys
 
     def addHTML(self):
-        bad = False
         html1 = "{}".format(
             '''<!DOCTYPE html><html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;width: 100%;}td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head><body><table><tr><th>Topic</th><th>Data</th><th>Time</th></tr>''')
-        html2 = ''
-        for i in self.healthData.keys():
+        # Create the beginning HTML
+        html2 = '' # create an empty string to store the table in
+        for i in self.healthData.keys():  # for each key...
             html2 += '''<tr>
             <th>{0}</th>
             <th>{1}</th>
             <th>{2}</th>
-            </tr>'''.format(i, self.healthData[i][0], str(time.time() - self.healthData[i][1]))
-        html4 = '<img src="file:~/home/arc852/catkin_ws/src/healthcheck/src/sanitycheck2018/python/assets/DefiniteBetterGuillemot-size_restricted.gif">'
-        html3 = '''</table></body></html>'''
-        return html1 + html2 + html3 + html4
+            </tr>'''.format(i, self.healthData[i][0], str(time.time() - self.healthData[i][1]))  # make the table
+            # TODO use the getValue instead of the self.healthData directly
+        html3 = '''</table></body></html>'''  # Close it all
+        return html1 + html2 + html3  # return the whole shebang
 
     def getValue(self, key):
-        if key in self.healthData:
-            return self.healthData[key]
+        if key in self.healthData:  # if we've already got data...
+            return self.healthData[key]  # give it up
         else:
-            self.healthData[key] = "The default value; no value has been set yet."
-            return self.healthData[key]
+            self.healthData[key] = "The default value; no value has been set yet."  # otherwise set a value
+            return self.healthData[key]  # and return it
 
-    def callback_test(self, data):
+    def callback_test(self, data):  # TODO make one function that accepts arguments for topic
         self.healthData["test_system"] = [data.data, time.time()]
 
     def callback_test2(self, data):

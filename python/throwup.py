@@ -25,7 +25,7 @@ http = Flask(__name__)
 def throwup():
     text = "I AM FANCY"
     return Response(text, mimetype='text/plain')
-    # throwup (badump-chhh) a simple server that says "I AM FANCY" in plaintext
+    # throwup (badump-chhh) a simple server that says "I AM FANCY" in plaintext, so you can make sure server is up
 
 
 @http.route('/overview')

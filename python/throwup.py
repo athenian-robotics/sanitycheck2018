@@ -35,6 +35,13 @@ def overview():
     return Response(text, mimetype='text/html')  # return the HTML
 
 
+@http.route('/add/<topic>')
+def add(topic):
+    global dataVault  # use the proper dataVault
+    text = dataVault.write(topic)
+    return Response(text, mimetype='text/html')  # return the HTML
+
+
 def run_http(flask_server, host, port):
     flask_server.run(host=host, port=port)
 

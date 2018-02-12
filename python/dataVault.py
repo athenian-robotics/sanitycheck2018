@@ -9,7 +9,7 @@ class StatusVault(object):
             self.set_deafult(topic)
     def addHTML(self):
         html1 = "{}".format(
-            '''<!DOCTYPE html><html><head><style>table {font-family: avenir, sans-serif;border-collapse: collapse;width: 100%;}td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head><body><h1>IF YOU DON'T SEE ANYTHING CHECK THAT YOU'RE PUBLISHING A STRING, ADIT</h1><table><tr><th>Topic</th><th>Data</th><th>Time</th></tr>''')
+            '''<!DOCTYPE html><html><head><style>table {font-family: avenir, sans-serif;border-collapse: collapse;width: 100%;}td, th {border: 1px solid #dddddd;text-align: left;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head><body><h1>YOU CAN PUBLISH ANY DATATYPE. HAPPY, ADIT?</h1><table><tr><th>Topic</th><th>Data</th><th>Time</th></tr>''')
         # Create the beginning HTML
         html2 = ''  # create an empty string to store the table in
         for i in self.healthData.keys():  # for each key...
@@ -32,7 +32,7 @@ class StatusVault(object):
         self.healthData[key] = ["The default value; no value has been set yet.", time.time()]
 
     def callback(self, data, system):
-        self.healthData[system] = [data.data, time.time()]
+        self.healthData[system] = [str(data.data), time.time()]
 
     def write(self, topic):
         with open("/home/arc852/catkin_ws/src/healthcheck/src/sanitycheck2018/python/topics.txt") as f:
@@ -40,5 +40,5 @@ class StatusVault(object):
             if topic in tmp:
                 return "Topic " + topic + " is already in database. Restart server to view changes."
         with open("/home/arc852/catkin_ws/src/healthcheck/src/sanitycheck2018/python/topics.txt", "a") as f:
-            self.topics = f.write("," + topic)  # get the list of topics from topics.txt
-            return "Topic " + topic + " added successfully."
+            self.topics = f.write(",/" + topic)  # write topic to end
+            return "Topic /" + topic + " added successfully."

@@ -34,7 +34,7 @@ def overview():
     return Response(text, mimetype='text/html')  # return the HTML
 
 
-@http.route('/add/<topic>')
+@http.route('/add/<path:topic>')
 def add(topic):
     global dataVault  # use the proper dataVault
     text = dataVault.write(topic)
@@ -58,7 +58,7 @@ def run_http(flask_server, host, port):
 
 if __name__ == '__main__':
     # http.run(debug=False, port=8080, host='0.0.0.0')
-    Thread(target=run_http, kwargs={'flask_server': http, "host": "0.0.0.0", "port": 8080}).start()
+    Thread(target=run_http, kwargs={'flask_server': http, "host": "localhost", "port": 5803}).start()
     # Start a server in a new thread
     rospy.init_node('healthcheckbackend')
     for topic in dataVault.topics:
